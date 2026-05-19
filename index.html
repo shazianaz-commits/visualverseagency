@@ -16,6 +16,62 @@
   scroll-behavior: smooth;
 }
 
+
+  <canvas id="bgCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
+
+<script>
+const c = document.getElementById('bgCanvas');
+const x = c.getContext('2d');
+
+function resize() { c.width = innerWidth; c.height = innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const flies = Array.from({length: 55}, () => ({
+  x: Math.random() * innerWidth,
+  y: Math.random() * innerHeight,
+  vx: (Math.random() - 0.5) * 0.6,
+  vy: (Math.random() - 0.5) * 0.6,
+  r: Math.random() * 2 + 1.5,
+  a: Math.random(),
+  as: Math.random() * 0.008 + 0.004,
+  col: Math.random() > 0.5 ? '255,215,0' : '139,92,246'
+}));
+
+function draw() {
+  x.clearRect(0, 0, c.width, c.height);
+  x.fillStyle = '#050505';
+  x.fillRect(0, 0, c.width, c.height);
+
+  flies.forEach(f => {
+    f.x += f.vx; f.y += f.vy;
+    if (f.x < 0 || f.x > c.width)  f.vx *= -1;
+    if (f.y < 0 || f.y > c.height) f.vy *= -1;
+    f.a += f.as;
+    if (f.a > 1 || f.a < 0) f.as *= -1;
+
+    // Glow halo
+    const g = x.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r * 5);
+    g.addColorStop(0, `rgba(${f.col},${f.a * 0.8})`);
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    x.beginPath();
+    x.arc(f.x, f.y, f.r * 5, 0, Math.PI * 2);
+    x.fillStyle = g;
+    x.fill();
+
+    // Core dot
+    x.beginPath();
+    x.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+    x.fillStyle = `rgba(${f.col},${f.a})`;
+    x.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+                                       
 body {
   background: #050505;
   color: white;
