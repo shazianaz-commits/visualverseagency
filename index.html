@@ -2800,155 +2800,75 @@ section::before{
   line-height: 1.6;
 }
 </style>
-
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agency Contact Section</title>
-
-<style>
-:root {
-  --bg: #000000;
-  --panel: #111111;
-  --text: #ffffff;
-  --accent: #ffd000;
-}
-
-body {
-  margin: 0;
-  font-family: Arial;
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* OPTIONAL HEADER STYLE (for anchor reference) */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #0a0a0a;
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  z-index: 1000;
-}
-
-header a {
-  color: white;
-  text-decoration: none;
-}
-
-header a:hover {
-  color: var(--accent);
-}
-
-/* CONTACT SECTION */
-#contact {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--bg); /* pure black */
-  padding: 80px 20px;
-}
-
-.box {
-  width: 380px;
-  height: 520px;
-  background: var(--panel);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #2a2a2a;
-  overflow: hidden;
-}
-
-.header {
-  padding: 12px;
-  background: #151515;
-  color: var(--accent);
-  font-weight: bold;
-  text-align: center;
-}
-
-.messages {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.msg {
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 14px;
-  max-width: 80%;
-}
-
-.user {
-  background: var(--accent);
-  color: black;
-  align-self: flex-end;
-}
-
-.bot {
-  background: #222;
-  color: white;
-  align-self: flex-start;
-}
-
-.input {
-  display: flex;
-  padding: 10px;
-  gap: 6px;
-  background: #151515;
-}
-
-.input input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-  background: #0d0d0d;
-  color: white;
-}
-
-.input button {
-  background: var(--accent);
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-</style>
-</head>
-
-<body>
-
-<!-- HEADER (IMPORTANT: links to contact section) -->
-<header>
-  <a href="#contact">Contact</a>
-</header>
-
 <!-- CONTACT SECTION -->
-<section id="contact">
+<section id="contact" style="min-height:100vh; display:flex; justify-content:center; align-items:center; background:#000; padding:80px 20px;">
 
-  <div class="box">
+  <div style="
+    width:380px;
+    height:520px;
+    background:#111;
+    border-radius:16px;
+    display:flex;
+    flex-direction:column;
+    border:1px solid #2a2a2a;
+    overflow:hidden;
+  ">
 
-    <div class="header">Contact Us</div>
-
-    <div class="messages" id="chatBox">
-      <div class="msg bot">Hi 👋 Tell us about your project</div>
+    <div style="
+      padding:12px;
+      background:#151515;
+      color:#ffd000;
+      font-weight:bold;
+      text-align:center;
+    ">
+      Contact Us
     </div>
 
-    <div class="input">
-      <input id="msg" placeholder="Type your message..." />
-      <button onclick="send()">➤</button>
+    <div id="chatBox" style="
+      flex:1;
+      padding:10px;
+      overflow-y:auto;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    ">
+      <div style="
+        padding:10px;
+        border-radius:10px;
+        font-size:14px;
+        max-width:80%;
+        background:#222;
+        color:#fff;
+        align-self:flex-start;
+      ">
+        Hi 👋 Tell us about your project
+      </div>
+    </div>
+
+    <div style="
+      display:flex;
+      padding:10px;
+      gap:6px;
+      background:#151515;
+    ">
+      <input id="msg" placeholder="Type your message..." style="
+        flex:1;
+        padding:10px;
+        border:none;
+        outline:none;
+        background:#0d0d0d;
+        color:#fff;
+        border-radius:8px;
+      ">
+
+      <button onclick="send()" style="
+        background:#ffd000;
+        border:none;
+        padding:10px;
+        cursor:pointer;
+        font-weight:bold;
+        border-radius:8px;
+      ">➤</button>
     </div>
 
   </div>
@@ -2963,13 +2883,23 @@ function send() {
   const text = input.value.trim();
   if (!text) return;
 
-  box.innerHTML += `<div class="msg user">${text}</div>`;
+  // user message
+  const user = document.createElement("div");
+  user.style = "padding:10px;border-radius:10px;background:#ffd000;color:#000;align-self:flex-end;max-width:80%;";
+  user.textContent = text;
+  box.appendChild(user);
+
   input.value = "";
 
+  // bot reply
   setTimeout(() => {
-    box.innerHTML += `<div class="msg bot">Thanks 👍 We will contact you soon.</div>`;
+    const bot = document.createElement("div");
+    bot.style = "padding:10px;border-radius:10px;background:#222;color:#fff;align-self:flex-start;max-width:80%;";
+    bot.textContent = "Thanks 👍 We will contact you soon.";
+    box.appendChild(bot);
   }, 500);
 
+  // WhatsApp send (HIDDEN)
   const phone = "923088846208";
   const url = `https://wa.me/${phone}?text=${encodeURIComponent("New Lead: " + text)}`;
 
@@ -2979,8 +2909,7 @@ function send() {
 }
 </script>
 
-</body>
-</html>
+  
 
   
 <!-- SOCIAL MEDIA LINKS -->
