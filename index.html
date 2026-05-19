@@ -2806,12 +2806,12 @@ section::before{
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agency Chat Contact</title>
+<title>Agency Contact Section</title>
 
 <style>
 :root {
-  --bg: #0b0b0b;
-  --panel: #141414;
+  --bg: #000000;
+  --panel: #111111;
   --text: #ffffff;
   --accent: #ffd000;
 }
@@ -2823,12 +2823,36 @@ body {
   color: var(--text);
 }
 
-/* CHAT SECTION */
-.chat {
+/* OPTIONAL HEADER STYLE (for anchor reference) */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #0a0a0a;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  z-index: 1000;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+header a:hover {
+  color: var(--accent);
+}
+
+/* CONTACT SECTION */
+#contact {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  background: var(--bg); /* pure black */
+  padding: 80px 20px;
 }
 
 .box {
@@ -2844,7 +2868,7 @@ body {
 
 .header {
   padding: 12px;
-  background: #1a1a1a;
+  background: #151515;
   color: var(--accent);
   font-weight: bold;
   text-align: center;
@@ -2882,7 +2906,7 @@ body {
   display: flex;
   padding: 10px;
   gap: 6px;
-  background: #1a1a1a;
+  background: #151515;
 }
 
 .input input {
@@ -2890,7 +2914,7 @@ body {
   padding: 10px;
   border: none;
   outline: none;
-  background: #0f0f0f;
+  background: #0d0d0d;
   color: white;
 }
 
@@ -2906,11 +2930,17 @@ body {
 
 <body>
 
-<section class="chat">
+<!-- HEADER (IMPORTANT: links to contact section) -->
+<header>
+  <a href="#contact">Contact</a>
+</header>
+
+<!-- CONTACT SECTION -->
+<section id="contact">
 
   <div class="box">
 
-    <div class="header">Chat with Us</div>
+    <div class="header">Contact Us</div>
 
     <div class="messages" id="chatBox">
       <div class="msg bot">Hi 👋 Tell us about your project</div>
@@ -2933,17 +2963,13 @@ function send() {
   const text = input.value.trim();
   if (!text) return;
 
-  // show user message
   box.innerHTML += `<div class="msg user">${text}</div>`;
-
   input.value = "";
 
-  // bot reply
   setTimeout(() => {
     box.innerHTML += `<div class="msg bot">Thanks 👍 We will contact you soon.</div>`;
   }, 500);
 
-  // WhatsApp hidden send (YOUR NUMBER ADDED)
   const phone = "923088846208";
   const url = `https://wa.me/${phone}?text=${encodeURIComponent("New Lead: " + text)}`;
 
@@ -2957,7 +2983,6 @@ function send() {
 </html>
 
   
-
 <!-- SOCIAL MEDIA LINKS -->
 <section style="text-align:center; padding:80px 10%; background:#000;">
 
