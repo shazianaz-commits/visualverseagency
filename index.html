@@ -2801,6 +2801,220 @@ section::before{
 }
 </style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Visual Verse Agency</title>
+
+<style>
+:root {
+  --bg-primary: #0b0f1a;
+  --bg-secondary: #11182a;
+  --text-primary: #ffffff;
+  --text-muted: #a7b0c0;
+  --accent: #6c5ce7;
+  --accent-2: #00d4ff;
+  --gradient: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero h1 span {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* CHAT SECTION */
+.chat-contact {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-secondary);
+  padding: 40px;
+}
+
+.chat-box {
+  width: 380px;
+  height: 600px;
+  background: #0f172a;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #1f2a44;
+}
+
+.chat-header {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  background: #111c33;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient);
+}
+
+.chat-body {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.msg {
+  padding: 10px 14px;
+  border-radius: 12px;
+  max-width: 80%;
+  font-size: 14px;
+}
+
+.msg.bot {
+  background: #1b2a4a;
+  align-self: flex-start;
+}
+
+.msg.user {
+  background: var(--gradient);
+  align-self: flex-end;
+  color: white;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background: #111c33;
+  gap: 8px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #0b1220;
+  color: white;
+}
+
+.chat-input button {
+  width: 45px;
+  border: none;
+  border-radius: 10px;
+  background: var(--gradient);
+  cursor: pointer;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>We Build <span>Digital Experiences</span></h1>
+  <p>Modern agency landing page with WhatsApp-style client communication system.</p>
+</section>
+
+<!-- CHAT CONTACT -->
+<section class="chat-contact">
+
+  <div class="chat-box">
+
+    <div class="chat-header">
+      <div class="avatar"></div>
+      <div>
+        <h3>Visual Verse Agency</h3>
+        <small>Typically replies within minutes</small>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <div class="msg bot">Hi 👋 How can we help you today?</div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" id="userMessage" placeholder="Type your message..." />
+      <button onclick="sendMessage()">➤</button>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+function sendMessage() {
+  const input = document.getElementById("userMessage");
+  const message = input.value.trim();
+  const chatBody = document.getElementById("chatBody");
+
+  if (!message) return;
+
+  // user message
+  const userMsg = document.createElement("div");
+  userMsg.className = "msg user";
+  userMsg.textContent = message;
+  chatBody.appendChild(userMsg);
+
+  input.value = "";
+
+  // bot response
+  setTimeout(() => {
+    const botMsg = document.createElement("div");
+    botMsg.className = "msg bot";
+    botMsg.textContent = "Redirecting you to WhatsApp... 📩";
+    chatBody.appendChild(botMsg);
+  }, 600);
+
+  // WhatsApp redirect (CHANGE NUMBER HERE)
+  const phone = "923001234567"; // your number
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+  setTimeout(() => {
+    window.open(url, "_blank");
+  }, 1200);
+}
+</script>
+
+</body>
+</html>
+
+  
 
 <!-- SOCIAL MEDIA LINKS -->
 <section style="text-align:center; padding:80px 10%; background:#000;">
