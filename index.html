@@ -1551,99 +1551,123 @@ section::before{
 </section>
 
 <style>
-/* SECTION */
 #services{
-  padding: 100px 10%;
-  background: radial-gradient(circle at top, #0b0b0b, #000);
+  padding: 120px 10%;
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
   text-align: center;
 }
 
 /* TITLE */
 .section-title{
-  font-size: 42px;
+  font-size: 44px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 60px;
-  position: relative;
-}
-
-.section-title::after{
-  content: "";
-  width: 90px;
-  height: 4px;
-  background: linear-gradient(90deg, #ff4d4d, #ffb84d);
-  display: block;
-  margin: 15px auto 0;
-  border-radius: 10px;
+  margin-bottom: 70px;
+  background: transparent;
 }
 
 /* GRID */
 .services-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  background: transparent;
 }
 
-/* CARD */
+/* ========================= */
+/* PREMIUM GLOW CARDS */
+/* ========================= */
+
 .service-card{
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 35px 25px;
-  border-radius: 18px;
-  transition: all 0.4s ease;
   position: relative;
-  overflow: hidden;
+  padding: 30px 25px;
+  border-radius: 18px;
+
+  /* glass base */
+  background: rgba(15, 15, 15, 0.45);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 208, 0, 0.15);
+
   text-align: left;
+  transition: all 0.35s ease;
+  overflow: hidden;
+  z-index: 1;
 }
 
-/* GLOW EFFECT */
+/* 🔥 MAIN GLOW LAYER (OUTSIDE LIGHT EFFECT) */
 .service-card::before{
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top left, rgba(255,77,77,0.12), transparent 60%);
+  inset: -2px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 200, 0, 0.4),
+    rgba(255, 120, 0, 0.25),
+    rgba(255, 0, 0, 0.2)
+  );
+  filter: blur(18px);
   opacity: 0;
-  transition: 0.5s;
+  transition: 0.4s ease;
+  z-index: -1;
+  border-radius: 20px;
+}
+
+/* 🔥 INNER LIGHT SHEEN */
+.service-card::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255, 200, 0, 0.12),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: 0.4s ease;
+}
+
+/* HOVER EFFECT */
+.service-card:hover{
+  transform: translateY(-10px);
+  border-color: rgba(255, 200, 0, 0.4);
 }
 
 .service-card:hover::before{
   opacity: 1;
 }
 
-.service-card:hover{
-  transform: translateY(-10px);
-  border-color: rgba(255, 180, 77, 0.4);
-  box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+.service-card:hover::after{
+  opacity: 1;
 }
 
 /* ICON */
 .service-icon{
-  font-size: 28px;
-  margin-bottom: 15px;
-  display: inline-block;
+  font-size: 26px;
+  margin-bottom: 14px;
+  display: inline-flex;
   padding: 10px;
   border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-}
 
-/* TITLE */
-.service-card h3{
-  color: #fff;
-  font-size: 18px;
-  margin-bottom: 10px;
+  background: rgba(255, 208, 0, 0.06);
+  border: 1px solid rgba(255, 208, 0, 0.18);
 }
 
 /* TEXT */
+.service-card h3{
+  color: #fff;
+  margin-bottom: 10px;
+}
+
 .service-card p{
-  color: #bbb;
-  font-size: 14px;
+  color: rgba(255,255,255,0.72);
   line-height: 1.6;
 }
-</style>
 
+  
 
 <!-- ========================= -->
 <!-- PORTFOLIO SECTION -->
