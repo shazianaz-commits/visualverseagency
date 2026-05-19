@@ -2802,6 +2802,120 @@ section::before{
 </style>
 
 
+  
+  <!-- CONTACT SECTION -->
+<section id="contact" style="min-height:100vh; display:flex; justify-content:center; align-items:center; background:#000; padding:80px 20px;">
+
+  <div style="
+    width:380px;
+    height:520px;
+    background:#111;
+    border-radius:16px;
+    display:flex;
+    flex-direction:column;
+    border:1px solid #2a2a2a;
+    overflow:hidden;
+  ">
+
+    <div style="
+      padding:12px;
+      background:#151515;
+      color:#ffd000;
+      font-weight:bold;
+      text-align:center;
+    ">
+      Contact Us
+    </div>
+
+    <div id="chatBox" style="
+      flex:1;
+      padding:10px;
+      overflow-y:auto;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    ">
+      <div style="
+        padding:10px;
+        border-radius:10px;
+        font-size:14px;
+        max-width:80%;
+        background:#222;
+        color:#fff;
+        align-self:flex-start;
+      ">
+        Hi 👋 Tell us about your project
+      </div>
+    </div>
+
+    <div style="
+      display:flex;
+      padding:10px;
+      gap:6px;
+      background:#151515;
+    ">
+      <input id="msg" placeholder="Type your message..." style="
+        flex:1;
+        padding:10px;
+        border:none;
+        outline:none;
+        background:#0d0d0d;
+        color:#fff;
+        border-radius:8px;
+      ">
+
+      <button onclick="send()" style="
+        background:#ffd000;
+        border:none;
+        padding:10px;
+        cursor:pointer;
+        font-weight:bold;
+        border-radius:8px;
+      ">➤</button>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+function send() {
+  const input = document.getElementById("msg");
+  const box = document.getElementById("chatBox");
+
+  const text = input.value.trim();
+  if (!text) return;
+
+  // user message
+  const user = document.createElement("div");
+  user.style = "padding:10px;border-radius:10px;background:#ffd000;color:#000;align-self:flex-end;max-width:80%;";
+  user.textContent = text;
+  box.appendChild(user);
+
+  input.value = "";
+
+  // bot reply
+  setTimeout(() => {
+    const bot = document.createElement("div");
+    bot.style = "padding:10px;border-radius:10px;background:#222;color:#fff;align-self:flex-start;max-width:80%;";
+    bot.textContent = "Thanks 👍 We will contact you soon.";
+    box.appendChild(bot);
+  }, 500);
+
+  // WhatsApp send (HIDDEN)
+  const phone = "923088846208";
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent("New Lead: " + text)}`;
+
+  setTimeout(() => {
+    window.open(url, "_blank");
+  }, 1100);
+}
+</script>
+
+
+
+  
+
 <!-- SOCIAL MEDIA LINKS -->
 <section style="text-align:center; padding:80px 10%; background:#000;">
 
